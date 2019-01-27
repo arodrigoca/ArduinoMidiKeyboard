@@ -26,6 +26,9 @@ Hi! In this repository it's the code from my newest project. I bought an olc Cas
 Libraries or software used. Please consider supporting the people that made all this incredible code to make our lifes easier :)
 
 Keypad - https://github.com/Chris--A/Keypad.git
+
 MIDI -   https://github.com/FortySevenEffects/arduino_midi_library.git
+
 Hairless Serial port to MIDI - http://projectgus.github.io/hairless-midiserial/
+
 loopMIDI - https://www.tobias-erichsen.de/software/loopmidi.html
