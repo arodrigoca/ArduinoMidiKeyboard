@@ -1,5 +1,5 @@
 # ArduinoMidiKeyboard
-A little project to transform an old Casio to be MIDI capable.
+A little project to transform an old Casio to be MIDI capable over USB. Im thinking about adding bluetooth to it, but not for now.
 
 Hi! In this repository it's the code from my newest project. I bought an olc Casio Tone Bank M-130, a very simple electric piano that had only the sounds coming from its very bad and cheap audio processor to convert it to a MIDI keyboard. The steps I followed to do this:
 
