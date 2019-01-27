@@ -22,3 +22,10 @@ Hi! In this repository it's the code from my newest project. I bought an olc Cas
 9-Tried in Cubase and it worked perfectly.
 
 10-I wanted to add a pitch bend wheel, so I grabbed an old RC controller stick (It is just a potentiometer) and connected it to A0, 5v and GND in the Mega. Added some more code to make it work and it was done. I had to put some value margins as the potentiometer was not very good, but the result was good in the end.
+
+Libraries or software used. Please consider supporting the people that made all this incredible code to make our lifes easier :)
+
+Keypad - https://github.com/Chris--A/Keypad.git
+MIDI -   https://github.com/FortySevenEffects/arduino_midi_library.git
+Hairless Serial port to MIDI - http://projectgus.github.io/hairless-midiserial/
+loopMIDI - https://www.tobias-erichsen.de/software/loopmidi.html
