@@ -15,4 +15,10 @@ Hi! In this repository it's the code from my newest project. I bought an olc Cas
 
 6-I wanted to use the USB interface for MIDI because it is very convenient. Not all sound cards have MIDI port (my case, Scarlett 2i2). I installed the Hairless MIDI software, that allows using a COM port as MIDI. To make it work, just added Serial.begin(115200) after the MIDI.begin(1) in the setup section.
 
-8-Checked the Hairless MIDI program received MIDI notes from the keyboard.
+7-Checked the Hairless MIDI program received MIDI notes from the keyboard. It did.
+
+8-Then, I installed the loopMIDI software. It allows to connect HairlessMIDI to any DAW or MIDI instrument program like synths. Just create a virtual port and then in Hairless select in MIDI out the port that you created before.
+
+9-Tried in Cubase and it worked perfectly.
+
+10-I wanted to add a pitch bend wheel, so I grabbed an old RC controller stick (It is just a potentiometer) and connected it to A0, 5v and GND in the Mega. Added some more code to make it work and it was done. I had to put some value margins as the potentiometer was not very good, but the result was good in the end.
