@@ -74,10 +74,10 @@ void loop() {
     int value = analogRead(A0);
   //Serial.println(value);
     if(value > 415 || value < 390){ //my potentiometer is not very good, the value read in the resting position varies a little bit
-      if(value >= 559){
-        value = 559;
-      }else if(value <= 158){
-        value = 158;
+      if(value >= 560){
+        value = 560;
+      }else if(value <= 153){
+        value = 153;
       }
     
       value = map(value,158,566,-8190,8190);
