@@ -1,6 +1,11 @@
 # ArduinoMidiKeyboard
 A little project to transform an old Casio to be MIDI capable over USB. Im thinking about adding bluetooth to it, but not for now.
 
+Note: in this tutorial, you will see that I use a software to create a virtual midi port. This is because my Arduino Mega is one of the cheaper ones, and have a different USB to Serial converter (CH340 chip in my case) which cannot be flashed with an HID capable firmware.
+If you have an Arduino Mega with an 16u2 or 8u2 chip, you should be able to flash an HID capable firmware and thus, skip the additional software that I used. However, this last method has a disadvantage. If an HID firmware is installed, you won't be able to upload code to the Arduino until you go back to the old firmware. This is specially painful when debugging your project or updating it. My method allows you to upload new code whenever you want, let alone not having to deal with the firmware update.
+
+
+
 Hi! In this repository it's the code from my newest project. I bought an olc Casio Tone Bank M-130, a very simple electric piano that had only the sounds coming from its very bad and cheap audio processor to convert it to a MIDI keyboard. The steps I followed to do this:
 
 1-Bought the keyboard.
