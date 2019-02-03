@@ -9,8 +9,8 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 
 const byte ROWS = 9;
 const byte COLS = 6;
-char keys[ROWS][COLS] = {
-{48,49,50,51,52,53},
+char keys[ROWS][COLS] = { //this is where you assign a MIDI note to each physical key on your keyboard.
+{48,49,50,51,52,53},////////In my case, I had a weird keyboard matrix.
 {60,61,62,63,64,65},
 {66,67,68,69,70,71},
 {72,73,74,75,76,77},
