@@ -15,3 +15,8 @@ synth without Xorg.
 Because I have the crappy Arduino with the translation script, things are a little bit more difficult.
 
 TODO
+
+(volume control:
+
+      amixer sset 'Speaker' 50%
+)
