@@ -21,7 +21,7 @@ Hi! In this repository it's the code from my newest project. I bought an olc Cas
 
 3-Tested all the keys were working using the Keypad library.
 
-4-Completed the keys array that the Keypad library needs to work. For this, as my keyboard has 49 keys, I decided which MIDI note would map to each key. 49 keys keyboard usually have C2 as the lower note and C6 as the highest note. Then, I looked up the MIDI note table to see what MIDI note number corresponded to what note. I made a mistake and made the keys array with the lowest MIDI note being 36, which is C1. Because I noticed this after being done with the keys array, I fixed it by adding an octave (12) to the MIDI note (it is commented in the code).
+4-Completed the keys array that the Keypad library needs to work. For this, as my keyboard has 49 keys, I decided which MIDI note would map to each key. 49 keys keyboard usually have C2 as the lower note and C6 as the highest note. Then, I looked up the MIDI note table to see what MIDI note number corresponded to what note. C2 is MIDI note 36 and C6 is MIDI note 84.
 
 5-Once I had that, I started coding the MIDI part. It was really simple, as MIDI library already has functions like send note off or on. My keyboard has only ON or OFF switches, so in this case MIDI velocity is set to 127 for all notes.
 
