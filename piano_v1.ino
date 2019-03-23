@@ -49,15 +49,15 @@ void loop() {
             if ( kpd.key[i].stateChanged )   // Only find keys that have changed state.
             {
                 int midinote = kpd.key[i].kchar; //convert the midi note to int from char
-                
+
                 switch (kpd.key[i].kstate) {  // Report active key state : IDLE, PRESSED, HOLD, or RELEASED
                     case PRESSED: //this messages are for debugging so they are not necessary.
                     //msg = " PRESSED.";
-                    MIDI.sendNoteOn(midinote+12, 127, 1); //12 is an octave shift (I developed all the code so C1 was the lowest note. With this, it is C2 instead).
+                    MIDI.sendNoteOn(midinote, 127, 1);
                 break;
                     case RELEASED:
                     //msg = " RELEASED.";
-                    MIDI.sendNoteOff(midinote+12, 127, 1);
+                    MIDI.sendNoteOff(midinote, 127, 1);
                 break;
                 }
                 //Serial.print("Key ");
@@ -79,7 +79,7 @@ void loop() {
       }else if(value <= 153){
         value = 153;
       }
-    
+
       value = map(value,158,566,-8190,8190);
       if(abs(value - lastPitchValue) >= 100){
         MIDI.sendPitchBend(value, 1);
@@ -90,4 +90,4 @@ void loop() {
       MIDI.sendPitchBend(0, 1);
       pastBend = false;
   }
-}  
+}
