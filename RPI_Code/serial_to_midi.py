@@ -9,10 +9,6 @@ try:
     while True:
 
         message = s.read(3)
-        byte_1 = message[0]
-        byte_2 = message[1]
-        byte_3 = message[2]
-        message = [byte_1, byte_2, byte_3]
         msg_output = mido.Message.from_bytes(message)
         #print(msg_output)
         outport.send(msg_output)
