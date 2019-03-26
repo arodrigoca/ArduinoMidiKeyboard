@@ -3,7 +3,7 @@ import mido
 
 s = serial.Serial('/dev/ttyUSB0', 115200, timeout = None)
 #print(mido.get_output_names())
-mido.open_output('Midi Through:Midi Through Port-0 14:0')
+mido.open_output()
 outport = mido.open_output()
 try:
     while True:
