@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include <DNSServer.h>
 
 #include "index.h"
 
@@ -12,16 +13,13 @@
 /* Set these to your desired credentials. */
 const char *ssid = APSSID;
 const char *password = APPSK;
-
+const byte DNS_PORT = 53;
+DNSServer dnsServer;
 ESP8266WebServer server(80);
+IPAddress apIP(192, 168, 1, 1);
 
-/* Just a little test message.  Go to http://192.168.4.1 in a web browser
-   connected to this access point to see it.
-*/
 void handleRoot() {
 
-  //String html_page = String("<!DOCTYPE HTML>\r\n") + "<html><head><meta name='viewport' charset='utf-8' content='width=device-width, initial-scale=1'><title>Sunvox Manager</title><style>#main_header{ color: blue; font-family: 'Lucida Console', Monaco, monospace;}</style><script> function gen_up(){ console.log('Generator Up'); } function gen_down(){ console.log('Generator Down'); }</script></head><body><h1 id='main_header'>Sunvox Controls</h1><div> <form action='/gen_up'> <input type='submit' value='Generator Up'></input> </form></div><div> <form action='/gen_down'> <input type='submit' value='Generator Down'></input> </form></div></html>";
-  //server.send(200, "text/html", html_page);
   String s = MAIN_page; //Read HTML contents
   server.send(200, "text/html", s); //Send web page
   Serial.println("Message sent to client");
@@ -31,13 +29,32 @@ void handleCommand(){
   String command = server.arg("command");
   Serial.println(command);
   server.send(200, "text/plane", command); //Send web page
+  if(command = "gen_up"){
+    digitalWrite(0, HIGH);
+    delay(500);
+    digitalWrite(0, LOW);
+  }else if(command == "gen_down"){
+    digitalWrite(2, HIGH);
+    delay(500);
+    digitalWrite(2, LOW);
+  }
+}
+
+void test_handler(){
+  server.send(200, "text/plane", "This is a test");
 }
 
 void setup() {
   //delay(1000);
+  pinMode(0, OUTPUT);
+  pinMode(2, OUTPUT);
   Serial.begin(115200);
+  WiFi.mode(WIFI_AP);
+  WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
   WiFi.softAP(ssid, password);
-
+  dnsServer.setTTL(300);
+  dnsServer.setErrorReplyCode(DNSReplyCode::ServerFailure);
+  dnsServer.start(DNS_PORT, "www.example.com", apIP);
   IPAddress myIP = WiFi.softAPIP();
   server.on("/", handleRoot);
   server.on("/send_command", handleCommand);
@@ -45,5 +62,6 @@ void setup() {
 }
 
 void loop() {
+  dnsServer.processNextRequest();
   server.handleClient();
 }
