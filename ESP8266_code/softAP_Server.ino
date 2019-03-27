@@ -6,8 +6,8 @@
 #include "index.h"
 
 #ifndef APSSID
-#define APSSID "ESPap"
-#define APPSK  "thereisnospoon"
+#define APSSID "314Synth"
+#define APPSK  "itspi"
 #endif
 
 /* Set these to your desired credentials. */
