@@ -9,7 +9,7 @@ def generator_up():
 
 def generator_up():
 
-    keyboard.send("trl+DOWN")
+    keyboard.send("ctrl+DOWN")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
