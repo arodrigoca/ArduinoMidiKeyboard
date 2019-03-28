@@ -4,12 +4,12 @@ import keyboard
 
 def generator_up():
 
-    keyboard.send("shift+>")
+    keyboard.send("ctrl+UP")
 
 
 def generator_up():
 
-    keyboard.send("shift+<")
+    keyboard.send("trl+DOWN")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
