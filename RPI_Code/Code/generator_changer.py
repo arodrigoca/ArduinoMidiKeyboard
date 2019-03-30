@@ -6,6 +6,12 @@ import subprocess
 global volume
 volume = 70
 
+class mute_object:
+
+    def __init__(self):
+
+        self.mute = False
+
 def init_keyboard():
 
     keyboard.press("shift")
@@ -52,6 +58,8 @@ subprocess.call("amixer sset 'Speaker' 70%", shell=True)
 init_keyboard()
 
 try:
+
+    mute = mute_object()
 
     server_sock=BluetoothSocket( RFCOMM )
     server_sock.bind(("",PORT_ANY))
