@@ -96,7 +96,7 @@ try:
                 volume_change(command)
 
         except IOError:
-
+            print("Client disconnected")
             client_sock, client_info = server_sock.accept()
             print ("Accepted connection from ", client_info)
 
