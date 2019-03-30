@@ -1,22 +1,55 @@
-import RPi.GPIO as GPIO
-import time
-import keyboard
+#!/usr/bin/env python3
 
-def generator_up():
+"""
+	File: pyBluezServer.py
+	Install packages:
+		apt-get install bluez libbluetooth-dev
+	Install python module:
+		pip3 install pybluez
+	Show bluetooth devices:
+		hciconfig -a
 
-    keyboard.send("ctrl+UP")
+	Configure the bluetooth interface:
+		hciconfig hci0 piscan
+"""
+
+import bluetooth
+import os
+import sys
 
 
-def generator_up():
+def print_help():
+	script_name = os.path.basename(__file__)
+	print('USAGE: ' + script_name + ' <server_port>')
 
-    keyboard.send("ctrl+DOWN")
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+def main(argv):
 
-GPIO.add_event_detect(4, GPIO.RISING, callback=generator_up, bouncetime=300)
-GPIO.add_event_detect(17, GPIO.RISING, callback=generator_down, bouncetime=300)
+	if len(argv) < 2:
+		print_help()
+		exit(1)
 
-while True:
-    time.sleep(0.01)
+	server_bt_port = int(argv[1])
+
+	server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+
+	server_bt_address = '', server_bt_port
+
+	server_sock.bind(server_bt_address)
+	server_sock.listen(1)
+
+	while True:
+
+		client_sock,address = server_sock.accept()
+		print('Accepted connection from ', address)
+
+		data = client_sock.recv(1024)
+		print('Received: ' + data.decode('utf-8'))
+
+		client_sock.close()
+
+	server_sock.close()
+
+
+if __name__ == '__main__':
+main(sys.argv)
