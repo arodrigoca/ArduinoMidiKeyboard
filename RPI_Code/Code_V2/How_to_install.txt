@@ -57,8 +57,6 @@ a2jmidid -e &> logs/a2jmidi.log &
 sleep 3
 jack_connect a2j:'UNO_AND_MIDI [20] (capture)':' UNO_AND_MIDI MIDI 1' SunVox:Keyboard1 &> logs/jack_connect.log
 sleep 4
-python3 synth_ready_led.py & <----(this is optional)
-
 
 In the jack_connect line, you will se weird syntax. To know how to construct the line, just run:
 
@@ -70,9 +68,11 @@ and it will show you your midi devices.
 now everytime you start the sunvox_start script, it will bring sunvox and you can play
 
 
-(if you want everything)
+(if you want everything, incluiding bluetooth, indicator leds, etc follow this additionally)
 
-just take the files in the important programs folder and paste it into the home of the pi. Then:
+just take the files in this folder and paste them into the home of the pi. Then:
+
+-raname bash_profile to .bash_profile
 
 -sudo apt-get install python3-pip
 -python3 -m pip install pybluez
