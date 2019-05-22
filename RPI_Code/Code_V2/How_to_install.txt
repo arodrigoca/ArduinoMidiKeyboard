@@ -1,0 +1,106 @@
+-fresh install raspbian lite
+-connect to wifi
+-boot options to console autologin
+-enable ssh
+-reboot
+-find synth ip address
+-sudo apt-get update
+-sudo rpi-update
+-reboot
+-sudo apt-get install libudev-dev
+-sudo apt-get install links
+-links http://www.libsdl.org
+-navigate and download the latest sdl source code .gz
+-gunzip SDL2....gz
+-tar vfx SDL2....tar
+-cd SDL2...
+-./configure --host=arm-raspberry-linux-gnueabihf --disable-video-opengl --disable-video-x11 --disable-pulseaudio --disable-esd --disable-video-mir --disable-video-wayland
+-make -j 4
+-sudo make install
+-sudo ldconfig
+-cd ..
+-sudo su
+-cd
+-cd usr/share/dbus-1/
+-sudo nano system.conf and add this policy:
+
+<policy user="pi">
+<allow own="org.freedesktop.ReserveDevice1.Audio0"/>
+<allow own="org.freedesktop.ReserveDevice1.Audio1"/>
+<allow own="org.freedesktop.ReserveDevice1.Audio2"/>
+</policy>
+
+-usermod -a -G audio pi
+-links http://warmplace.ru/soft/sunvox/ (Download SunVox)
+-unzip sunvox...
+-sudo apt-get install jackd2
+-yes on realtime support
+-sudo apt-get install a2jmidid
+
+-------------actually fuck this part because it doesnt work------------
+-nano ~/.jackdrc
+-Paste in: /usr/bin/jackd -P70 -p16 -t2000 -dalsa -dhw:2,0 -p256 -n3 -r44100 -s &
+-the 2,0 comes from: arecord -l --> card 2 device 0
+
+(in my case, instead of "2,0" i had to type "Device")
+-------------------------------------------------------------------------
+-sudo nano .bash_profile
+-add  export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+-sudo apt-get install dbus-x11
+
+-now, for the first time, run this command:
+-dbus-launch jackd -P70 -p16 -t2000 -dalsa -dhw:Device -p256 -n3 -r44100 -s &
+-then open sunvox(by ./sunvox inside the armhf_rpi folder) and select in preferences, audio, driver jack
+-reboot sunvox
+-start sunvox and in preferences, MIDI, set JACK
+-now, create a script named sunvox_start.sh in the home directory with this content:
+
+#!/bin/bash
+dbus-launch jackd -P70 -p16 -t2000 -dalsa -dhw:Device -p256 -n3 -r44100 -s &> logs/jack_log.log &
+sleep 4
+/home/pi/sunvox/sunvox/linux_arm_armhf_raspberry_pi/sunvox &
+sleep 8
+a2jmidid -e &> logs/a2jmidi.log &
+sleep 3
+jack_connect a2j:'UNO_AND_MIDI [20] (capture)':' UNO_AND_MIDI MIDI 1' SunVox:Keyboard1 &> logs/jack_connect.log
+sleep 4
+python3 synth_ready_led.py & <----(this is optional)
+
+
+In the jack_connect line, you will se weird syntax. To know how to construct the line, just run:
+
+a2jmidid -e
+then jack_lsp
+and it will show you your midi devices.
+
+
+now everytime you start the sunvox_start script, it will bring sunvox and you can play
+
+
+(if you want everything)
+
+just take the files in the important programs folder and paste it into the home of the pi. Then:
+
+-sudo apt-get install python3-pip
+-python3 -m pip install pybluez
+
+to configure a bluetooth device to pair with it:
+
+-bluetoothctl
+-agent on
+-default-agent
+-scan on
+
+wait for it to find devices
+
+-pair (direction)
+
+then accept and it's done
+
+then:
+
+-sudo apt-get -y install python3-rpi.gpio
+-sudo chmod +x sunvox_start.sh
+-mkdir logs
+
+you are done!
