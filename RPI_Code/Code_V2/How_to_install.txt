@@ -93,6 +93,7 @@ then accept and it's done
 then:
 
 -sudo apt-get -y install python3-rpi.gpio
+-python3 -m pip install keyboard
 -sudo chmod +x sunvox_start.sh
 -mkdir logs
 
