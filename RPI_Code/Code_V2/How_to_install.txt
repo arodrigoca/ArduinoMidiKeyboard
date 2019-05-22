@@ -73,9 +73,11 @@ now everytime you start the sunvox_start script, it will bring sunvox and you ca
 just take the files in this folder and paste them into the home of the pi. Then:
 
 -raname bash_profile to .bash_profile
-sudo apt-get install bluetooth libbluetooth-dev
 -sudo apt-get install python3-pip
+-sudo apt-get install bluetooth libbluetooth-dev
 -sudo python3 -m pip install pybluez
+-modify /etc/systemd/system/dbus-org.bluez.service
+to get ExecStart=/usr/lib/bluetooth/bluetoothd -C
 
 to configure a bluetooth device to pair with it:
 
