@@ -37,13 +37,6 @@
 -yes on realtime support
 -sudo apt-get install a2jmidid
 
--------------actually fuck this part because it doesnt work------------
--nano ~/.jackdrc
--Paste in: /usr/bin/jackd -P70 -p16 -t2000 -dalsa -dhw:2,0 -p256 -n3 -r44100 -s &
--the 2,0 comes from: arecord -l --> card 2 device 0
-
-(in my case, instead of "2,0" i had to type "Device")
--------------------------------------------------------------------------
 -sudo nano .bash_profile
 -add  export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
 -sudo apt-get install dbus-x11
