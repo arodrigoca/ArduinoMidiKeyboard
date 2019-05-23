@@ -98,7 +98,19 @@ then:
 -sudo python3 -m pip install keyboard
 -sudo chmod +x sunvox_start.sh
 -mkdir logs
--alsamixer, then select the sound card as generic usb device. Exit.
+-aplay -l to list sound cards. Check your card number (1, 2, etc)
+-sudo nano /etc/asound.conf and paste this:
+
+pcm.!default {
+    type hw
+    card [your card number]
+}
+
+ctl.!default {
+    type hw           
+    card [your card number]
+}
+
 -reboot the system
 
 now, when the synth is ready to work, the red led comes on. if you press the left button, it starts sunvox and brings the green led on when ready. To turn off the synth, press the other button.
